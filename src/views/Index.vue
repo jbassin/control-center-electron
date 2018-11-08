@@ -1,8 +1,6 @@
 <template>
   <div>
-    <p class="title">
-      Insert Title Here!
-    </p>
+    HELLO
   </div>
 </template>
 

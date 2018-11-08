@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Index</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <ccHeader/>
     <router-view/>
   </div>
 </template>
+
+<script>
+import ccHeader from './components/misc/header/header.vue';
+
+export default {
+  name: 'app',
+  components: { ccHeader },
+};
+</script>
 
 <style>
 @import "~bulmaswatch/solar/bulmaswatch.min.css";
