@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^3.0.0",
+    "@fortawesome/fontawesome-free": "^5.5.0",
     "@vue/cli-plugin-babel": "^3.0.4",
     "@vue/cli-plugin-e2e-cypress": "^3.0.4",
     "@vue/cli-plugin-eslint": "^3.0.4",
