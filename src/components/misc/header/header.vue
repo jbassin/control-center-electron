@@ -4,10 +4,10 @@
       <div class="hero-body">
         <div class="container has-text-centered">
           <p class="title">
-            Title
+            Dungeons & Dashboards
           </p>
           <p class="subtitle">
-            Subtitle
+            A Control Center for your Campaign
           </p>
         </div>
       </div>
@@ -16,24 +16,12 @@
         <nav class="tabs is-boxed is-fullwidth">
           <div class="container">
             <ul>
-              <li class="is-active">
-                <a>Overview</a>
-              </li>
-              <li>
-                <a>Modifiers</a>
-              </li>
-              <li>
-                <a>Grid</a>
-              </li>
-              <li>
-                <a>Elements</a>
-              </li>
-              <li>
-                <a>Components</a>
-              </li>
-              <li>
-                <a>Layout</a>
-              </li>
+              <ccTab title="Campaign"/>
+              <ccTab title="Modifiers"/>
+              <ccTab title="Grid"/>
+              <ccTab title="Elements"/>
+              <ccTab title="Components"/>
+              <ccTab title="Layout"/>
             </ul>
           </div>
         </nav>
@@ -43,8 +31,13 @@
 </template>
 
 <script>
+import ccTab from './header-components/tab.vue';
+
 export default {
-  name: 'cc-header',
+  name: 'ccHeader',
+  components: {
+    ccTab,
+  },
 };
 </script>
 
