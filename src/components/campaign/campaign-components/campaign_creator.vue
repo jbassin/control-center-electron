@@ -1,5 +1,8 @@
 <template>
   <div>
+    <p class="subtitle is-4">
+      Campaign Creator:
+    </p>
     <div class="field has-addons">
       <p class="control">
         <a class="button is-static">

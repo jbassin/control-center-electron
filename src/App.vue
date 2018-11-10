@@ -15,6 +15,6 @@ export default {
 </script>
 
 <style>
-@import "~bulmaswatch/solar/bulmaswatch.min.css";
+@import "~bulmaswatch/darkly/bulmaswatch.min.css";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 </style>
