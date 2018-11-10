@@ -63,8 +63,4 @@ export default {
 .container {
   margin-top: 20px;
 }
-
-.button {
-  margin-top: 20px;
-}
 </style>
