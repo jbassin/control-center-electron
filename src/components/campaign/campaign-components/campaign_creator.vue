@@ -8,7 +8,10 @@
         <div class="field">
           <label class="label">Campaign Name:</label>
           <div class="control has-icons-left">
-            <input class="input" type="text" placeholder="The Adventurers">
+            <input class="input"
+                   type="text"
+                   placeholder="The Adventurers"
+                   v-model="name">
               <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
               </span>
@@ -65,12 +68,16 @@ export default {
   name: 'ccCampaignCreator',
   data() {
     return {
-      id: '',
+      name: '',
     };
   },
-  methods: {
-    updateId(name) {
-      return name;
+  computed: {
+    id() {
+      if (this.name === '') {
+        return '';
+      }
+      // const sha = require('crypto-js/sha256');
+      return require('crypto-js/sha256')(this.name);
     },
   },
 };
