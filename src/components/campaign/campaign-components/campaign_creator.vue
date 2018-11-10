@@ -66,6 +66,9 @@
 <script>
 export default {
   name: 'ccCampaignCreator',
+  props: {
+    campaignTitles: { required: true },
+  },
   data() {
     return {
       name: '',
@@ -76,7 +79,6 @@ export default {
       if (this.name === '') {
         return '';
       }
-      // const sha = require('crypto-js/sha256');
       return require('crypto-js/sha256')(this.name);
     },
   },

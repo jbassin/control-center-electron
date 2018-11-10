@@ -3,10 +3,10 @@
     <p class="subtitle is-4">
       Available Campaigns:
     </p>
-    <div v-if="this.campaigns.length > 0">
+    <div v-if="this.campaignTitles.length > 0">
       <table class="table is-bordered is-hoverable is-fullwidth">
         <tbody>
-        <tr v-for="(camp, index) in this.campaigns"
+        <tr v-for="(camp, index) in this.campaignTitles"
             :key="index">
           <th>
             {{ camp }}
@@ -56,30 +56,15 @@
 
 export default {
   name: 'ccCampaignList',
+  props: {
+    campaignTitles: { required: true },
+  },
   data() {
     return {
-      campaigns: this.getCampaigns(),
       selectedCampaign: '',
     };
   },
   methods: {
-    getCampaigns() {
-      const fs = require('fs');
-      const dndDirectory = `${require('os').homedir()}/.dnd`;
-
-      if (!fs.existsSync(dndDirectory)) {
-        fs.mkdirSync(dndDirectory);
-      }
-
-      const camps = [];
-      fs.readdir(dndDirectory, (err, files) => {
-        if (err) throw err;
-        for (const file of files) {
-          camps.push(file);
-        }
-      });
-      return camps;
-    },
   },
 };
 </script>
