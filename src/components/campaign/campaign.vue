@@ -2,24 +2,10 @@
   <div class="container">
     <div class="notification">
       <div v-if="checkState('campaign-selector')">
-        <ccCampaignList/>
-        <div class="columns is-gapless">
-          <div class="column is-8"></div>
-          <div class="column is-2">
-            <button class="button is-success is-outlined">
-              Select this Campaign
-            </button>
-          </div>
-          <div class="column is-2">
-            <button class="button is-primary is-outlined"
-                    @click="setState('campaign-creator')">
-              Create New Campaign
-            </button>
-          </div>
-        </div>
+        <ccCampaignList @campaign-creator="setState('campaign-creator')"/>
       </div>
       <div v-if="checkState('campaign-creator')">
-        <ccCampaignCreator/>
+        <ccCampaignCreator @campaign-selector="setState('campaign-selector')"/>
       </div>
     </div>
   </div>

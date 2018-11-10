@@ -20,6 +20,34 @@
         No campaigns found :( Press the button below to make one!
       </p>
     </div>
+    <div class="columns">
+      <div class="column is-8"></div>
+      <div class="column is-4">
+        <div class="field is-grouped">
+          <p class="control">
+            <a class="button is-success is-outlined">
+              <span class="icon is-small">
+                <i class="fas fa-check"></i>
+              </span>
+              <span>
+                Select this Campaign
+              </span>
+            </a>
+          </p>
+          <p class="control">
+            <a class="button is-primary is-outlined"
+               @click="$emit('campaign-creator')">
+              <span class="icon is-small">
+                <i class="fas fa-plus"></i>
+              </span>
+              <span>
+                Create New Campaign
+              </span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,6 +59,7 @@ export default {
   data() {
     return {
       campaigns: this.getCampaigns(),
+      selectedCampaign: '',
     };
   },
   methods: {
