@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 const state = {
-  activeTab: 'Modifiers',
+  activeTab: 'Campaign',
 };
 
 const mutations = {
