@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "bulmaswatch": "^0.7.2",
+    "crypto-js": "^3.1.9-1",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
