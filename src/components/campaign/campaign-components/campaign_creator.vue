@@ -9,6 +9,8 @@
           <label class="label">Campaign Name:</label>
           <div class="control has-icons-left">
             <input class="input"
+                   :class="{ 'is-success': nameFree && this.id !== '',
+                             'is-danger': !nameFree && this.id !== '' }"
                    type="text"
                    placeholder="The Adventurers"
                    v-model="name">
@@ -16,8 +18,13 @@
                 <i class="fas fa-user"></i>
               </span>
           </div>
-          <p class="help">
-            This username is available
+          <p class="help is-success"
+             v-if="nameFree && this.id !== ''">
+            This name is available
+          </p>
+          <p class="help is-danger"
+             v-if="!nameFree && this.id !== ''">
+            This name is already taken
           </p>
         </div>
       </div>
@@ -74,7 +81,10 @@ export default {
       if (this.name === '') {
         return '';
       }
-      return require('crypto-js/sha256')(this.name);
+      return require('crypto-js/sha256')(this.name).toString();
+    },
+    nameFree() {
+      return !this.campaignTitles.includes(this.id);
     },
   },
 };
