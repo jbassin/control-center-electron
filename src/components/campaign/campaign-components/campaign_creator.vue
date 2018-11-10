@@ -3,15 +3,31 @@
     <p class="subtitle is-4">
       Campaign Creator:
     </p>
-    <div class="field has-addons">
-      <p class="control">
-        <a class="button is-static">
-          Campaign Name:
-        </a>
-      </p>
-      <p class="control">
-        <input class="input" type="text" placeholder="The Adventurers">
-      </p>
+    <div class="columns">
+      <div class="column is-4">
+        <div class="field">
+          <label class="label">Campaign Name:</label>
+          <div class="control has-icons-left">
+            <input class="input" type="text" placeholder="The Adventurers">
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+          </div>
+          <p class="help">
+            This username is available
+          </p>
+        </div>
+      </div>
+      <div class="column is-8">
+        <div class="field">
+          <label class="label">Campaign Id:</label>
+          <div class="control">
+            <label>
+              <input class="input" type="text" :value="this.id" readonly>
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="columns">
       <div class="column is-8"></div>
@@ -47,6 +63,16 @@
 <script>
 export default {
   name: 'ccCampaignCreator',
+  data() {
+    return {
+      id: '',
+    };
+  },
+  methods: {
+    updateId(name) {
+      return name;
+    },
+  },
 };
 </script>
 

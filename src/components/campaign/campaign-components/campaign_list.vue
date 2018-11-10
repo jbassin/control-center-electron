@@ -35,7 +35,7 @@
             </a>
           </p>
           <p class="control">
-            <a class="button is-primary is-outlined"
+            <a class="button is-info is-outlined"
                @click="$emit('campaign-creator')">
               <span class="icon is-small">
                 <i class="fas fa-plus"></i>
