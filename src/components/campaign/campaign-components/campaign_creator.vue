@@ -47,7 +47,7 @@
       </div>
     </div>
     <div class="notification is-dark">
-      <ccPlayerCreator/>
+      <ccCharacterCreator @new-character="this.characters"/>
     </div>
     <div class="field is-grouped is-grouped-right">
       <p class="control">
@@ -76,12 +76,12 @@
 </template>
 
 <script>
-import ccPlayerCreator from './player_creator.vue';
+import ccCharacterCreator from './character_creator.vue';
 
 export default {
   name: 'ccCampaignCreator',
   components: {
-    ccPlayerCreator,
+    ccCharacterCreator,
   },
   props: {
     campaignTitles: { required: true },
@@ -89,6 +89,7 @@ export default {
   data() {
     return {
       name: '',
+      players: [],
     };
   },
   computed: {
