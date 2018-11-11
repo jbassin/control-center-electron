@@ -70,7 +70,8 @@
     </div>
     <div class="field is-grouped is-grouped-right">
       <p class="control">
-        <a class="button is-success is-outlined">
+        <a class="button is-success is-outlined"
+           @click="campaignDone">
         <span class="icon is-small">
           <i class="fas fa-plus"></i>
         </span>
@@ -111,12 +112,24 @@ export default {
       characters: [],
     };
   },
+  methods: {
+    campaignDone() {
+      if (this.name === '' || this.characters.length === 0) {
+        return;
+      }
+      const campaign = {};
+      campaign.name = this.name;
+      campaign.id = this.id;
+      campaign.characters = this.characters;
+      this.$emit('new-campaign', campaign);
+    },
+  },
   computed: {
     id() {
       if (this.name === '') {
         return '';
       }
-      return require('crypto-js/sha256')(this.name).toString();
+      return `cmp-${require('crypto-js/sha256')(this.name).toString()}`;
     },
     nameFree() {
       return !this.campaignTitles.includes(this.id);

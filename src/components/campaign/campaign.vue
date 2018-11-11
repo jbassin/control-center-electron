@@ -3,11 +3,12 @@
     <div class="notification">
       <div v-if="checkState('campaign-selector')">
         <ccCampaignList @campaign-creator="setState('campaign-creator')"
-                        :campaign-titles="directories"/>
+                        :campaign-titles="refreshDirectories()"/>
       </div>
       <div v-if="checkState('campaign-creator')">
         <ccCampaignCreator @campaign-selector="setState('campaign-selector')"
-                           :campaign-titles="directories"/>
+                           @new-campaign="saveCampaign"
+                           :campaign-titles="refreshDirectories()"/>
       </div>
     </div>
   </div>
@@ -27,34 +28,59 @@ export default {
   data() {
     return {
       currentState: 'campaign-selector',
+      currentDirectories: [],
     };
   },
   methods: {
-    checkState(passedState) {
-      return passedState === this.currentState;
-    },
-    setState(passedState) {
-      this.currentState = passedState;
-    },
-  },
-  computed: {
-    directories() {
+    refreshDirectories() {
       const fs = require('fs');
       const dndDirectory = `${require('os').homedir()}/.dnd`;
 
       !fs.existsSync(dndDirectory) && fs.mkdirSync(dndDirectory);
 
-      const camps = [];
+      const dirs = [];
       fs.readdir(dndDirectory, (err, files) => {
         if (err) throw err;
         files.forEach((file) => {
-          if (fs.lstatSync(`${dndDirectory}/${file}`).isDirectory()) {
-            camps.push(file);
+          if (fs.lstatSync(`${dndDirectory}/${file}`).isDirectory() && file.length === 68) {
+            dirs.push(file);
           }
         });
       });
-      return camps;
+      this.currentDirectories = dirs;
+      return dirs;
     },
+    checkState(passedState) {
+      return passedState === this.currentState;
+    },
+    setState(passedState) {
+      this.refreshDirectories();
+      this.currentState = passedState;
+    },
+    saveCampaign(passedCampaign) {
+      const fs = require('fs');
+      const campaignDirectory = `${require('os').homedir()}/.dnd/${passedCampaign.id}`;
+
+      fs.mkdirSync(campaignDirectory);
+
+      const campaignInfo = {};
+      campaignInfo.name = passedCampaign.name;
+      campaignInfo.id = passedCampaign.id;
+      const campaignInfoJson = JSON.stringify(campaignInfo);
+      fs.writeFileSync(`${campaignDirectory}/campaign.info`, campaignInfoJson);
+
+      fs.mkdirSync(`${campaignDirectory}/characters`);
+      passedCampaign.characters.forEach((character) => {
+        const characterJson = JSON.stringify(character);
+        fs.writeFileSync(`${campaignDirectory}/characters/${character.id}.info`, characterJson);
+      });
+      this.setState('campaign-selector');
+    },
+  },
+  computed: {
+  },
+  mounted() {
+    this.refreshDirectories();
   },
 };
 </script>

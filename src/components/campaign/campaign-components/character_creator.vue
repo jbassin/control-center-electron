@@ -350,17 +350,6 @@
         </span>
         </a>
       </p>
-      <p class="control">
-        <a class="button is-danger is-outlined"
-           @click="$emit('campaign-selector')">
-          <span class="icon is-small">
-            <i class="fas fa-ban"></i>
-          </span>
-          <span>
-            Remove
-          </span>
-        </a>
-      </p>
     </div>
   </div>
 </template>
@@ -428,6 +417,7 @@ export default {
       }
       const character = {};
       character.name = this.characterName;
+      character.id = `pla-${require('crypto-js/sha256')(character.name).toString()}`;
       character.race = this.characterRace;
       character.class = this.characterClass;
       character.level = this.characterLevel;
