@@ -47,7 +47,26 @@
       </div>
     </div>
     <div class="notification is-dark">
-      <ccCharacterCreator @new-character="this.characters"/>
+      <div v-for="(character, index) in characters"
+           :key="index">
+        <nav class="level">
+          <div class="level-left">
+            <span class="icon level-item">
+              <i class="far fa-dot-circle"></i>
+            </span>
+            <span class="level-item subtitle is-5">
+              Level {{ character.level }} {{ character.race }} {{ character.class }}: {{ character.name }}
+            </span>
+          </div>
+          <div class="level-right">
+            <div class="level-item is-danger">
+              <a class="delete"
+                 @click="characters.splice(index, 1)"></a>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <ccCharacterCreator @new-character="characters.push($event)"/>
     </div>
     <div class="field is-grouped is-grouped-right">
       <p class="control">
@@ -89,7 +108,7 @@ export default {
   data() {
     return {
       name: '',
-      players: [],
+      characters: [],
     };
   },
   computed: {

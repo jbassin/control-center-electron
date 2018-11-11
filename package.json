@@ -51,7 +51,8 @@
     "rules": {
       "vue/no-use-v-if-with-v-for": "off",
       "global-require": "off",
-      "no-restricted-syntax": "off"
+      "no-restricted-syntax": "off",
+      "max-len": "off"
     },
     "parserOptions": {
       "parser": "babel-eslint"

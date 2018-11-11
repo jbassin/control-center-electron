@@ -426,7 +426,7 @@ export default {
             && this.characterStatsAllValid)) {
         return;
       }
-      let character;
+      const character = {};
       character.name = this.characterName;
       character.race = this.characterRace;
       character.class = this.characterClass;
