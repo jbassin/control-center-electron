@@ -6,7 +6,9 @@
     <div class="columns">
       <div class="column is-4">
         <div class="field">
-          <label class="label">Campaign Name:</label>
+          <label class="label">
+            Campaign Name:
+          </label>
           <div class="control has-icons-left">
             <input class="input"
                    :class="{ 'is-success': nameFree && this.id !== '',
@@ -30,14 +32,22 @@
       </div>
       <div class="column is-8">
         <div class="field">
-          <label class="label">Campaign Id:</label>
+          <label class="label">
+            Campaign Id:
+          </label>
           <div class="control">
             <label>
-              <input class="input" type="text" :value="this.id" readonly>
+              <input class="input"
+                     type="text"
+                     :value="this.id"
+                     readonly>
             </label>
           </div>
         </div>
       </div>
+    </div>
+    <div class="notification is-dark">
+      <ccPlayerCreator/>
     </div>
     <div class="field is-grouped is-grouped-right">
       <p class="control">
@@ -66,8 +76,13 @@
 </template>
 
 <script>
+import ccPlayerCreator from './player_creator.vue';
+
 export default {
   name: 'ccCampaignCreator',
+  components: {
+    ccPlayerCreator,
+  },
   props: {
     campaignTitles: { required: true },
   },
