@@ -18,7 +18,7 @@
                            :campaign-titles="refreshDirectories()"/>
       </div>
       <div v-if="checkState('campaign-viewer')">
-        <ccCampaignViewer/>
+        <ccCampaignViewer @campaign-selector="setState('campaign-selector')"/>
       </div>
     </div>
   </div>
