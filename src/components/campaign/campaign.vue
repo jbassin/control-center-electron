@@ -17,6 +17,9 @@
                            @new-campaign="saveCampaign"
                            :campaign-titles="refreshDirectories()"/>
       </div>
+      <div v-if="checkState('campaign-viewer')">
+        <ccCampaignViewer/>
+      </div>
     </div>
   </div>
 </template>
@@ -26,13 +29,13 @@
 
 import ccCampaignList from './campaign-components/campaign_list.vue';
 import ccCampaignCreator from './campaign-components/campaign_creator.vue';
+import ccCampaignViewer from './campaign-components/campaign_viewer.vue';
 import ccConfirmModal from '../misc/shared/confirm_modal.vue';
-
 
 export default {
   name: 'ccCampaign',
   components: {
-    ccCampaignList, ccCampaignCreator, ccConfirmModal,
+    ccCampaignList, ccCampaignCreator, ccConfirmModal, ccCampaignViewer,
   },
   data() {
     return {
@@ -55,17 +58,15 @@ export default {
 
       !fs.existsSync(dndDirectory) && fs.mkdirSync(dndDirectory);
 
-      const dirs = [];
-      fs.readdir(dndDirectory, (err, files) => {
-        if (err) throw err;
-        files.forEach((file) => {
-          if (fs.lstatSync(`${dndDirectory}/${file}`).isDirectory() && file.length === 68) {
-            dirs.push(file);
-          }
-        });
+      const dirs = fs.readdirSync(dndDirectory);
+      const goodDirs = [];
+      dirs.forEach((dir) => {
+        if (fs.lstatSync(`${dndDirectory}/${dir}`).isDirectory() && dir.length === 68) {
+          goodDirs.push(dir);
+        }
       });
-      this.currentDirectories = dirs;
-      return dirs;
+      this.currentDirectories = goodDirs;
+      return goodDirs;
     },
     checkState(passedState) {
       return passedState === this.currentState;
