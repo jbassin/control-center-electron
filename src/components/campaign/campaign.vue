@@ -53,15 +53,14 @@ export default {
       this.modal.returnStatus = campaignIndex;
     },
     refreshDirectories() {
-      const fs = require('fs');
       const dndDirectory = `${require('os').homedir()}/.dnd`;
 
-      !fs.existsSync(dndDirectory) && fs.mkdirSync(dndDirectory);
+      !this.$fs.existsSync(dndDirectory) && this.$fs.mkdirSync(dndDirectory);
 
-      const dirs = fs.readdirSync(dndDirectory);
+      const dirs = this.$fs.readdirSync(dndDirectory);
       const goodDirs = [];
       dirs.forEach((dir) => {
-        if (fs.lstatSync(`${dndDirectory}/${dir}`).isDirectory() && dir.length === 68) {
+        if (this.$fs.lstatSync(`${dndDirectory}/${dir}`).isDirectory() && dir.length === 68) {
           goodDirs.push(dir);
         }
       });
@@ -76,21 +75,20 @@ export default {
       this.currentState = passedState;
     },
     saveCampaign(passedCampaign) {
-      const fs = require('fs-extra');
       const campaignDirectory = `${require('os').homedir()}/.dnd/${passedCampaign.id}`;
 
-      fs.mkdirSync(campaignDirectory);
+      this.$fs.mkdirSync(campaignDirectory);
 
       const campaignInfo = {};
       campaignInfo.name = passedCampaign.name;
       campaignInfo.id = passedCampaign.id;
       const campaignInfoJson = JSON.stringify(campaignInfo);
-      fs.writeFileSync(`${campaignDirectory}/campaign.info`, campaignInfoJson);
+      this.$fs.writeFileSync(`${campaignDirectory}/campaign.info`, campaignInfoJson);
 
-      fs.mkdirSync(`${campaignDirectory}/characters`);
+      this.$fs.mkdirSync(`${campaignDirectory}/characters`);
       passedCampaign.characters.forEach((character) => {
         const characterJson = JSON.stringify(character);
-        fs.writeFileSync(`${campaignDirectory}/characters/${character.id}.info`, characterJson);
+        this.$fs.writeFileSync(`${campaignDirectory}/characters/${character.id}.info`, characterJson);
       });
       this.setState('campaign-selector');
     },
@@ -100,9 +98,8 @@ export default {
         this.modal.returnStatus = '';
         return;
       }
-      const fs = require('fs-extra');
       const campaignDirectory = `${require('os').homedir()}/.dnd/${this.modal.returnStatus}`;
-      fs.removeSync(campaignDirectory);
+      this.$fs.removeSync(campaignDirectory);
       this.refreshDirectories();
       this.modal.visible = false;
       this.modal.returnStatus = '';

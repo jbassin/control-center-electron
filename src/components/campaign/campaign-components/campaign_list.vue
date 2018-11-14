@@ -81,14 +81,13 @@ export default {
   methods: {
     selectCampaign() {
       if (this.selectedCampaign !== '') {
-        const fs = require('fs-extra');
         const characterDirectory = `${require('os').homedir()}/.dnd/${this.selectedCampaign.id}/characters`;
-        fs.readdir(characterDirectory, (err, files) => {
+        this.$fs.readdir(characterDirectory, (err, files) => {
           const characterList = [];
           if (err) throw err;
           files.forEach((file) => {
             if (file.length === 73) {
-              characterList.push(JSON.parse(fs.readFileSync(`${characterDirectory}/${file}`, 'utf-8')));
+              characterList.push(JSON.parse(this.$fs.readFileSync(`${characterDirectory}/${file}`, 'utf-8')));
             }
           });
           this.$store.dispatch({
@@ -105,12 +104,11 @@ export default {
   },
   computed: {
     campaigns() {
-      const fs = require('fs-extra');
       const dndDirectory = `${require('os').homedir()}/.dnd`;
 
       const campaigns = [];
       this.campaignDirectories.forEach((dir) => {
-        campaigns.push(JSON.parse(fs.readFileSync(`${dndDirectory}/${dir}/campaign.info`, 'utf-8')));
+        campaigns.push(JSON.parse(this.$fs.readFileSync(`${dndDirectory}/${dir}/campaign.info`, 'utf-8')));
       });
       return campaigns;
     },
