@@ -75,7 +75,7 @@ export default {
       this.currentState = passedState;
     },
     saveCampaign(passedCampaign) {
-      const fs = require('fs');
+      const fs = require('fs-extra');
       const campaignDirectory = `${require('os').homedir()}/.dnd/${passedCampaign.id}`;
 
       fs.mkdirSync(campaignDirectory);

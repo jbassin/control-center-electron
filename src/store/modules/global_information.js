@@ -4,12 +4,19 @@ const state = {
 };
 
 const mutations = {
-  setActiveTab(store, selectedTab) {
-    store.activeTab = selectedTab;
+  SET_ACTIVE_TAB: (store, payload) => {
+    store.activeTab = payload.tab;
   },
 };
 
-const actions = {};
+const actions = {
+  setActiveTab: (context, payload) => {
+    context.commit({
+      type: 'SET_ACTIVE_TAB',
+      tab: payload.tab,
+    });
+  },
+};
 
 export default {
   state,

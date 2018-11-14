@@ -18,7 +18,10 @@ export default {
   },
   methods: {
     setActiveTab() {
-      this.$store.commit('global_information/setActiveTab', this.title);
+      this.$store.dispatch({
+        type: 'global_information/setActiveTab',
+        tab: this.title,
+      });
     },
   },
 };

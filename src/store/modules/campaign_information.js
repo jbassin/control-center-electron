@@ -1,15 +1,22 @@
 /* eslint-disable no-param-reassign */
 const state = {
-  campaign: [],
+  campaign: {},
 };
 
 const mutations = {
-  setCampaign(store, campaign) {
-    store.campaign = campaign;
+  MUTATE_CAMPAIGN: (store, payload) => {
+    store.campaign = payload.campaign;
   },
 };
 
-const actions = {};
+const actions = {
+  setCampaign: (context, payload) => {
+    context.commit({
+      type: 'MUTATE_CAMPAIGN',
+      campaign: payload.campaign,
+    });
+  },
+};
 
 export default {
   state,

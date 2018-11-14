@@ -40,7 +40,8 @@
     </div>
     <div class="field is-grouped is-grouped-right end-buttons">
       <p class="control">
-        <a class="button is-success is-outlined">
+        <a class="button is-success is-outlined"
+           @click="selectCampaign">
           <span class="icon is-small">
             <i class="fas fa-check"></i>
           </span>
@@ -77,9 +78,34 @@ export default {
       selectedCampaign: '',
     };
   },
+  methods: {
+    selectCampaign() {
+      if (this.selectedCampaign !== '') {
+        const fs = require('fs-extra');
+        const characterDirectory = `${require('os').homedir()}/.dnd/${this.selectedCampaign.id}/characters`;
+        fs.readdir(characterDirectory, (err, files) => {
+          const characterList = [];
+          if (err) throw err;
+          files.forEach((file) => {
+            if (file.length === 73) {
+              characterList.push(JSON.parse(fs.readFileSync(`${characterDirectory}/${file}`, 'utf-8')));
+            }
+          });
+          this.$store.dispatch({
+            type: 'campaign_information/setCampaign',
+            campaign: this.selectedCampaign,
+          });
+          this.$store.dispatch({
+            type: 'character_information/setCharacters',
+            characters: characterList,
+          });
+        });
+      }
+    },
+  },
   computed: {
     campaigns() {
-      const fs = require('fs');
+      const fs = require('fs-extra');
       const dndDirectory = `${require('os').homedir()}/.dnd`;
 
       const campaigns = [];
