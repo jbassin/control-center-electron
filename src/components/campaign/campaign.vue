@@ -55,8 +55,6 @@ export default {
     refreshDirectories() {
       const dndDirectory = `${require('os').homedir()}/.dnd`;
 
-      !this.$fs.existsSync(dndDirectory) && this.$fs.mkdirSync(dndDirectory);
-
       const dirs = this.$fs.readdirSync(dndDirectory);
       const goodDirs = [];
       dirs.forEach((dir) => {
