@@ -9,6 +9,7 @@
     <div class="notification">
       <div v-if="checkState('campaign-selector')">
         <ccCampaignList @campaign-creator="setState('campaign-creator')"
+                        @campaign-viewer="setState('campaign-viewer')"
                         @delete-campaign="confirmDeleteCampaign"
                         :campaign-directories="refreshDirectories()"/>
       </div>

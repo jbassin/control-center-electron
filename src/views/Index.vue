@@ -21,10 +21,18 @@ export default {
       this.$fs.mkdirSync(dndDirectory);
 
       const config = {};
-      config.versionNumber = this.$store.state.global_information.versionNumber;
-      config.versionName = this.$store.state.global_information.versionName;
-      config.defaultCampaign = this.$store.state.global_information.defaultCampaign;
+      config.versionNumber = this.$store.state.global_information.config.versionNumber;
+      config.versionName = this.$store.state.global_information.config.versionName;
+      config.defaultCampaign = this.$store.state.global_information.config.defaultCampaign;
       this.$fs.writeFileSync(`${dndDirectory}/config.info`, JSON.stringify(config));
+    } else {
+      const config = JSON.parse(this.$fs.readFileSync(`${dndDirectory}/config.info`, 'utf-8'));
+      if (config.defaultCampaign !== '') {
+        this.$store.dispatch({
+          type: 'global_information/setDefaultCampaign',
+          campaign: config.defaultCampaign,
+        });
+      }
     }
   },
 };

@@ -98,6 +98,13 @@ export default {
             type: 'character_information/setCharacters',
             characters: characterList,
           });
+          this.$store.dispatch({
+            type: 'global_information/setDefaultCampaign',
+            campaign: this.selectedCampaign.id,
+          });
+          this.$fs.unlinkSync(`${require('os').homedir()}/.dnd/config.info`);
+          this.$fs.writeFileSync(`${require('os').homedir()}/.dnd/config.info`, JSON.stringify(this.$store.state.global_information.config));
+          this.$emit('campaign-viewer');
         });
       }
     },
@@ -112,6 +119,16 @@ export default {
       });
       return campaigns;
     },
+  },
+  created() {
+    if (this.$store.state.global_information.config.defaultCampaign !== '') {
+      this.$_.each(this.campaigns, (campaign) => {
+        if (campaign.id === this.$store.state.global_information.config.defaultCampaign) {
+          this.selectedCampaign = campaign;
+        }
+      });
+      this.selectCampaign();
+    }
   },
 };
 </script>

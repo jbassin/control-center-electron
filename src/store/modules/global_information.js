@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
 const state = {
   activeTab: 'Campaign',
-
-  versionNumber: '0.1.0',
-  versionName: 'Aboleth',
-
-  defaultCampaign: '',
+  config: {
+    versionNumber: '0.1.0',
+    versionName: 'Aboleth',
+    defaultCampaign: '',
+  },
 };
 
 const mutations = {
@@ -13,7 +13,7 @@ const mutations = {
     store.activeTab = payload.tab;
   },
   SET_DEFAULT_CAMPAIGN: (store, payload) => {
-    store.defaultCampaign = payload.campaign;
+    store.config.defaultCampaign = payload.campaign;
   },
 };
 
