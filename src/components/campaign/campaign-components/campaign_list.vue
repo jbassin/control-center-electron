@@ -102,8 +102,7 @@ export default {
             type: 'global_information/setDefaultCampaign',
             campaign: this.selectedCampaign.id,
           });
-          this.$fs.unlinkSync(`${require('os').homedir()}/.dnd/config.info`);
-          this.$fs.writeFileSync(`${require('os').homedir()}/.dnd/config.info`, JSON.stringify(this.$store.state.global_information.config));
+          require('../../../helpers/helpers').rewriteFileSync(`${require('os').homedir()}/.dnd/config.info`, this.$store.state.global_information.config);
           this.$emit('campaign-viewer');
         });
       }
